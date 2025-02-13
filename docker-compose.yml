@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  target-server:
+    image: nginx
+    networks:
+      - ddos-lab
+    ports:
+      - "8080:80"
+
+  attacker1:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    networks:
+      - ddos-lab
+
+  attacker2:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    networks:
+      - ddos-lab
+
+networks:
+  ddos-lab:
+    driver: bridge
